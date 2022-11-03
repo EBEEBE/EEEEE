@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello from CI/CD");
-
+var configuration = (IConfiguration)app.Service(typeof(IConfiguration));
+app.MapGet("/", () => $"Hello world! Value: {configuration.GetSection("test").Value}");
 app.Run();
